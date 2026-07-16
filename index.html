@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aze Shop | Ecommerce</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #050505;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(cyan, purple);
+            border-radius: 20px;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, cyan, purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav ul li {
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav ul li:hover {
+            color: cyan;
+            transform: translateY(-3px);
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(to right, cyan, purple);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px cyan;
+        }
+
+        /* HERO */
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: cyan;
+            filter: blur(180px);
+            opacity: 0.2;
+            top: -200px;
+            left: -200px;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: purple;
+            filter: blur(180px);
+            opacity: 0.2;
+            bottom: -200px;
+            right: -200px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            line-height: 1.1;
+            background: linear-gradient(to right, cyan, white, purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            margin-top: 20px;
+            color: #ccc;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-buttons button {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .btn1 {
+            background: linear-gradient(to right, cyan, purple);
+            color: white;
+        }
+
+        .btn2 {
+            background: transparent;
+            border: 2px solid white !important;
+            color: white;
+        }
+
+        .hero-buttons button:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* SECTION TITLE */
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            background: linear-gradient(to right, cyan, purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title p {
+            color: #aaa;
+            margin-top: 10px;
+        }
+
+        /* PRODUCTS */
+        .products {
+            padding: 120px 8%;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: 0.5s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: cyan;
+            box-shadow: 0 0 35px rgba(0, 255, 255, 0.3);
+        }
+
+        .card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: 0.6s;
+        }
+
+        .card:hover img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+        }
+
+        .price {
+            color: cyan;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .card button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(to right, cyan, purple);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .card button:hover {
+            transform: scale(1.05);
+        }
+
+        /* FEATURES */
+        .features {
+            padding: 120px 8%;
+            background: #0c0c0c;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 25px;
+            transition: 0.5s;
+            text-align: center;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .feature i {
+            font-size: 4rem;
+        }
+
+        .feature h3 {
+            margin: 20px 0;
+            font-size: 1.7rem;
+        }
+
+        .feature p {
+            color: #aaa;
+            line-height: 1.8;
+        }
+
+        /* TESTIMONIALS */
+        .testimonials {
+            padding: 120px 8%;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 35px;
+            border-radius: 25px;
+            transition: 0.5s;
+        }
+
+        .testimonial:hover {
+            transform: scale(1.05);
+        }
+
+        .testimonial p {
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .testimonial h4 {
+            margin-top: 20px;
+            color: cyan;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 30px 8%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        footer p {
+            color: #aaa;
+        }
+
+        .socials {
+            display: flex;
+            gap: 15px;
+            font-size: 1.5rem;
+        }
+
+        .socials span {
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .socials span:hover {
+            color: cyan;
+            transform: translateY(-5px);
+        }
+
+        /* SCROLL ANIMATION */
+        .hidden {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 1s ease;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 900px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media(max-width: 500px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+
+</head>
+
+<body><!-- NAVBAR -->
+    <nav>
+        <div class="logo">AZE SHOP</div>
+
+        <ul>
+            <li>Home</li>
+            <li>Products</li>
+            <li>Features</li>
+            <li>Contact</li>
+        </ul>
+
+        <button class="nav-btn">Login</button>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Modern Ecommerce Website</h1>
+
+            <p>
+                Full responsive ecommerce UI with hover effects,
+                scroll animations and premium modern design.
+            </p>
+
+            <div class="hero-buttons">
+                <button class="btn1">Shop Now</button>
+                <button class="btn2">Explore</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- PRODUCTS -->
+    <section class="products hidden">
+
+        <div class="section-title">
+            <h2>Trending Products</h2>
+            <p>Beautiful hover cards with smooth animations</p>
+        </div>
+
+        <div class="product-grid">
+
+            <div class="card">
+                <img
+                    src="https://www.pcworld.com/wp-content/uploads/2025/04/alienware-gaming-laptop.jpg?quality=50&strip=all&w=1024">
+
+                <div class="card-content">
+                    <h3>Gaming Laptop</h3>
+                    <div class="price">$899</div>
+                    <button>Add To Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1200&auto=format&fit=crop">
+
+                <div class="card-content">
+                    <h3>Headphones</h3>
+                    <div class="price">$149</div>
+                    <button>Add To Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200&auto=format&fit=crop">
+
+                <div class="card-content">
+                    <h3>Smart Watch</h3>
+                    <div class="price">$199</div>
+                    <button>Add To Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1200&auto=format&fit=crop">
+
+                <div class="card-content">
+                    <h3>Camera</h3>
+                    <div class="price">$699</div>
+                    <button>Add To Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?q=80&w=1200&auto=format&fit=crop">
+
+                <div class="card-content">
+                    <h3>Keyboard</h3>
+                    <div class="price">$99</div>
+                    <button>Add To Cart</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop">
+
+                <div class="card-content">
+                    <h3>Modern Chair</h3>
+                    <div class="price">$120</div>
+                    <button>Add To Cart</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features hidden">
+
+        <div class="section-title">
+            <h2>Why Choose Us</h2>
+            <p>Modern animations and premium experience</p>
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature">
+                <i>⚡</i>
+                <h3>Fast Delivery</h3>
+                <p>
+                    Get products quickly with smooth shopping experience.
+                </p>
+            </div>
+
+            <div class="feature">
+                <i>💎</i>
+                <h3>Premium Quality</h3>
+                <p>
+                    Best quality products with futuristic ecommerce design.
+                </p>
+            </div>
+
+            <div class="feature">
+                <i>🎧</i>
+                <h3>24/7 Support</h3>
+                <p>
+                    Customer support available anytime for your help.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials hidden">
+
+        <div class="section-title">
+            <h2>Customer Reviews</h2>
+            <p>What our users say</p>
+        </div>
+
+        <div class="testimonial-grid">
+
+            <div class="testimonial">
+                <p>
+                    Amazing ecommerce design with modern animations and responsive layout.
+                </p>
+
+                <h4>Ali Khan</h4>
+            </div>
+
+            <div class="testimonial">
+                <p>
+                    Product cards and hover effects look super premium and smooth.
+                </p>
+
+                <h4>Ahmed Raza</h4>
+            </div>
+
+            <div class="testimonial">
+                <p>
+                    Best ecommerce UI for learning frontend development.
+                </p>
+
+                <h4>Usman</h4>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="logo">AZE SHOP</div>
+
+        <p>© 2026 Aze Shop. All Rights Reserved.</p>
+
+        <div class="socials">
+            <span>🌐</span>
+            <span>📘</span>
+            <span>📸</span>
+        </div>
+    </footer>
+
+
+    <script>
+
+        // SCROLL ANIMATION
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+
+
+        // BUTTON CLICK EFFECT
+        const buttons = document.querySelectorAll('button');
+
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.style.boxShadow = '0 0 30px cyan';
+            });
+
+            button.addEventListener('mouseleave', () => {
+                button.style.boxShadow = 'none';
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
